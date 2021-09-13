@@ -284,7 +284,7 @@ W&I en KiK hebben ieder hun ontwikkelaars die functionaliteit voor het eigen Tea
 Services op het KiK Team en het W&I Team zijn volledig van elkaar geïsoleerd: een service in het Otomi Team KiK heeft geen toegang tot een service op het Team W&I en vis versa.
 Service op het Team KiK en ket Team W&I hebben wel volledig toegang tot services op het midden Team.
 
-Voordelen
+Voordelen:
 * Schaalvoordeel door gedeelde midden functionaliteit
 Nadelen
 * Gedeelde verantwoordelijkheid voor functionaliteit van het midden platform
