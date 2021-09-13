@@ -1,4 +1,4 @@
-# cloudnative-cg
+# Cloudnative Common Ground
 ## Inleiding
 Dit document beschrijft de architectuur richtlijnen voor voor in eerset instantie KiK (Klantgerichtwerken in Ketens), maar mogelijk ook voor andere Organistatie Onderdelen (OOs).
 
