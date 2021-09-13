@@ -288,6 +288,7 @@ Service op het Team KiK en ket Team W&I hebben wel volledig toegang tot services
 
 Voordelen:
 * Schaalvoordeel door gedeelde midden functionaliteit
-Nadelen
+
+Nadelen:
 * Gedeelde verantwoordelijkheid voor functionaliteit van het midden platform
 * Hogere operationeel beheer last: drie platforms om te beheren
