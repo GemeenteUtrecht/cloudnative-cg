@@ -76,6 +76,7 @@ Laag 5 componenten hebben interactie met componenten op laag 5 en nooit direct i
 
 ### Technologie keuzes
 Voor de ontwikkeling van frontend applicaties bedoeld voor burgers en bedrijven wordt zoveel als mogelijk gebruik gemaakt van het van NL design systems afgeleide Utrecht Design system:https://github.com/nl-design-system/utrecht
+
 Voor de ontwikkeling van overige micro frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
 
 Material Design is de de-facto standaard component bibliotheek van Angular, met een groot aantal UI elementen zoals: drop-down box, datapicker, menu, tabel met pagination en sorteer opties.
