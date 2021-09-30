@@ -9,22 +9,22 @@
 * [Monitoring en logging richtlijnen](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#monitoring-en-logging-richtlijnen)
 * [Component documentatie](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#component-documentatie)
 * [Database architectuur](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#database-architectuur)
-* [CI/CD](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#ci/cd)
+* [CI/CD](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#cicd)
 * [Midden team functionaliteit](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#midden-team-functionaliteit)
 
 ## Inleiding
-Dit document beschrijft de architectuur richtlijnen voor voor in eerset instantie KiK (Klantgerichtwerken in Ketens), maar mogelijk ook voor andere Organistatie Onderdelen (OOs).
+Dit document beschrijft in eerste instantie de architectuur richtlijnen voor KiK (Klantgerichtwerken in Ketens), maar de richtlijnen kunnen ook door andere Organistatie Onderdelen (OOs) worden toegepast.
 
 De nadruk ligt op laag 4 en 5 van het Common Ground vijf lagen model.
 
-Het KiK programma is gebaseerd op de gemeentelijke Common Ground architectuur principes.
+Het programma is gebaseerd op de gemeentelijke Common Ground architectuur principes.
 
 Daarnaast is gekozen voor een Cloud Native benadering.
-Cloud Native houdt voor KiK in dat gebruik wordt gemaakt van Azure Kubernetes (AKS) met Otomi voor het beheer.
+Cloud Native houdt in dit gevaal in dat gebruik wordt gemaakt van Azure Kubernetes (AKS) met Otomi voor het beheer.
 
 Het streven is om zoveel mogelijk leverancier agnostisch te zijn, zodat bijvoorbeeld van Azure overgestapt kan worden naar een andere cloud provider.
 
-Een ander uitgangspunt voor de architectuur is om te komen tot afstemming en synergie met andere OOs.
+Een ander uitgangspunt voor de architectuur is om te komen tot synergie en hergebruik tussen verschillende OOs.
 
 Het platform bestaande uit Kubernetes op Azure (AKS) en Otomi is gevalideerd op basis van de Baseline Informatiebeveiliging Overheid (BIO) en ISO 27001.
 In dit document wordt niet uitputtend ingegaan op beveiliging vraagstukken voor applicaties. Dit onderwerp rechtvaardigt een eigen document.
@@ -123,7 +123,7 @@ Knative is een existentie op Kubernetes die de complexe taken voor ontwikkelaars
 Met Knative kunnen ontwikkelaars zich richten op de applicatie zelf in plaats van ‘bijzaken‘ zoals complexe Kubernetes configuratie met yaml files.
 Hiermee wordt invulling gegeven aan het ‘Vereenvoudiging van taken’ architectuur principe.
 
-Knative omvat de ‘Serving’ en ‘Eventing’ sub-projecten. De KiK architectuur maakt enkel gebruik van Knative ‘Serving’.
+Knative omvat de ‘Serving’ en ‘Eventing’ sub-projecten. Otomi ondersteund enkel Knative ‘Serving’.
 Knative Serving biedt een serverless platform voor de uitrol van containers on Kubernetes.
 Out-of-the-box ondersteund Knative Serving de volgende functionaliteit:
 * Automatisch schalen van services afhankelijk van de ‘load’; desgewenst tot nul.
@@ -256,16 +256,6 @@ Op Azure kan gebruik worden gemaakt van een van de volgende twee managed Postgre
 
 De keuze tussen een enkele server en een server group wordt bepaald door de afweging tussen beschikbaarheid/schaalbaarheid en kosten.
 
-Het volgende kosten voorbeeld is gebaseerd op prijzen in april 2021; zie: https://azure.microsoft.com/en-us/pricing/details/postgresql/hyperscale-citus/.
-* Enkele database server 8 vCores: € 348 / mnd
-  * Hyperscale (citus) database cluster:
-  * 2 worker nodes 4 vCores elk: 2 x € 276 / mnd
-  * 1 coordination node: € 219 / mnd
-  * Totaal: € 771 / mnd
-Bovenstaande prijzen zijn alleen ter illustratie en zijn gebaseerd op gereserveerde instances van 1 jaar, exclusief kosten voor dataopslag en backup.
-
-De database dient ‘in transit’ en ‘at rest’ beveiligd te worden met ‘customer managed keys’ die kunnen worden opgeslagen in de Vault service van het cluster.
-
 ###  5.2  Database alternatieven
 Als met PostgreSQL niet meer voldaan kan worden aan de eisen op het gebied van prestatie en schaalbaarheid kan als alternatief een NoSQL database worden overwogen.
 Veelgebruikte NoSQL databases zijn MongoDB en Cassandra.
@@ -290,7 +280,7 @@ CI/CD is gebaseerd op de volgende principes:
 * De product owner of beheerder kan kiezen voor een ‘canary deployment’ waarbij de nieuwe versie bijvoorbeeld 10% van het verkeer krijgt. Op die manier worden eventuele problemen met de nieuwe versie zichtbaar zonder dat de hele organisatie hiervan te veel last heeft.
 
 ## Midden team functionaliteit
-Het uitgangspunt is dat verschillende OOs zoals KiK en W&I samenwerken waar mogelijk.
+Het uitgangspunt is dat verschillende OOs samenwerken waar mogelijk.
 Gemeenschappelijke functionaliteit wordt ondergebracht in het “Midden Team”.
 
 Om efficiënt samen te werken dient er overeenstemming te zijn over:
@@ -307,12 +297,12 @@ In een micro-service architectuur is het strikt genomen niet nodig dat alle serv
 * Gemeenschappelijke code standaarden
 
 ### Modus operandum
-In het volgende figuur zijn met Otomi drie Teams gedefinieerd in een cluster: W&I, KiK en Midden. Een Team in Otomi is een Namespace in Kubernetes en kan optioneel geïsoleerd worden van andere Otomi Teams.
+In het volgende figuur zijn met Otomi drie Teams gedefinieerd in een cluster: W&I, 'x' en Midden. Een Team in Otomi is een Namespace in Kubernetes en kan optioneel geïsoleerd worden van andere Otomi Teams.
 
-W&I en KiK hebben ieder hun ontwikkelaars die functionaliteit voor het eigen Team ontwikkelen en daarnaast bijdragen aan de gemeenschappelijke functionaliteit van het Otomi Team Midden.
+De OOs W&I en 'x' hebben ieder hun ontwikkelaars die functionaliteit voor het eigen Team ontwikkelen en daarnaast bijdragen aan de gemeenschappelijke functionaliteit van het Otomi Team Midden.
 
-Services op het KiK Team en het W&I Team zijn volledig van elkaar geïsoleerd: een service in het Otomi Team KiK heeft geen toegang tot een service op het Team W&I en vis versa.
-Service op het Team KiK en ket Team W&I hebben wel volledig toegang tot services op het midden Team.
+Services op het 'x' Team en het W&I Team zijn volledig van elkaar geïsoleerd: een service in het Otomi Team 'x' heeft geen toegang tot een service op het Team W&I en vis versa.
+Service op het Team 'x' en ket Team W&I hebben wel volledig toegang tot services op het midden Team.
 
 ![](https://github.com/GemeenteUtrecht/cloudnative-cg/raw/main/WIKiK.png)
 
