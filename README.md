@@ -1,4 +1,17 @@
 # Cloudnative Common Ground
+
+## Index
+* [Inleiding](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#inleiding)
+* [Architectuur principes](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#architectuur-principes)
+* [Richtlijnen voor laag 5 componenten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#richtlijnen-voor-laag-5-componenten)
+* [Richtlijnen voor laag 4 componenten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#richtlijnen-voor-laag-4-componenten)
+* [API richtlijnen](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#api-richtlijnen)
+* [Monitoring en logging richtlijnen](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#monitoring-en-logging-richtlijnen)
+* [Component documentatie](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#component-documentatie)
+* [Database architectuur](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#database-architectuur)
+* [CI/CD](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#ci/cd)
+* [Midden team functionaliteit](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#midden-team-functionaliteit)
+
 ## Inleiding
 Dit document beschrijft de architectuur richtlijnen voor voor in eerset instantie KiK (Klantgerichtwerken in Ketens), maar mogelijk ook voor andere Organistatie Onderdelen (OOs).
 
@@ -258,6 +271,23 @@ Als met PostgreSQL niet meer voldaan kan worden aan de eisen op het gebied van p
 Veelgebruikte NoSQL databases zijn MongoDB en Cassandra.
 Welke database keuze er ook wordt gemaakt voor laag 1, het uitgangspunt is dat de Common Ground API van laag 2 en de componenten op de lagen daarboven niet wijzigen.
 De migratie naar een NoSQL heeft echter een zeer grote impact op de lagen 1 en 2.
+
+## CI/CD
+CI/CD is gebaseerd op de volgende principes:
+* Elk component kan afzonderlijk worden uitgerold
+* In lijn met het losse koppeling principe, heeft elk component zijn eigen git repository
+* Het ontwikkel proces [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) danwel OneFlow moet worden doorlopen voordat code kan worden ge-commit aan de git main branch
+* De uitrol naar productie en acceptatie is volledig geaautomitiseerd zonder handmatige stapppen.
+   * Fouten worden vermeden: de uitrol is volledig reproduceerbaar.
+   * Mindere werk: maakt frequente uitrol mogelijk.
+* Indien er gekozen is voor een acceptatie omgeving, dient er volledige pariteit tussen acceptatie en productie te zijn.
+   * Als iets in acceptatie werkt weet je zeker dat het precies zo werkt in productie.
+* De geautomatiseerde CI/CD pijplijn wordt getriggerd door een commit op de git main branch
+* Geautomatiseerde tests worden uitgevoerd als onderdeel van de CI/CD pijplijn
+* De output van een CI/CD straat is een (docker) image in het Harbor registry
+* Harbor scant het image op kwetsbaarheden
+* CD kan in principe staan voor Continious Deployment of voor Continious Delivery. Er is gekozen voor deze laatste definitie; hierbij is er een altijd een persoon (product owner of  beheerder) die beslist of een nieuwe versie in productie gaat.
+* De product owner of beheerder kan kiezen voor een ‘canary deployment’ waarbij de nieuwe versie bijvoorbeeld 10% van het verkeer krijgt. Op die manier worden eventuele problemen met de nieuwe versie zichtbaar zonder dat de hele organisatie hiervan te veel last heeft.
 
 ## Midden team functionaliteit
 Het uitgangspunt is dat verschillende OOs zoals KiK en W&I samenwerken waar mogelijk.
