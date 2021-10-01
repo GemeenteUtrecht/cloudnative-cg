@@ -266,7 +266,7 @@ De migratie naar een NoSQL heeft echter een zeer grote impact op de lagen 1 en 2
 CI/CD is gebaseerd op de volgende principes:
 * Elk component kan afzonderlijk worden uitgerold
 * In lijn met het losse koppeling principe, heeft elk component zijn eigen git repository
-* Het ontwikkel proces [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) danwel [GitHub Flow](https://scottchacon.com/2011/08/31/github-flow.html) moet worden doorlopen voordat code kan worden ge-commit aan de git main branch
+* Het ontwikkel proces [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) danwel [GitHub Flow](https://scottchacon.com/2011/08/31/github-flow.html) moet worden doorlopen voordat code kan worden ge-commit naar de git main branch
 * De uitrol naar productie en acceptatie is volledig geaautomitiseerd zonder handmatige stapppen.
    * Fouten worden vermeden: de uitrol is volledig reproduceerbaar.
    * Mindere werk: maakt frequente uitrol mogelijk.
