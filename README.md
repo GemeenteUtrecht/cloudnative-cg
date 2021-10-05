@@ -84,7 +84,9 @@ De UI is gebaseerd op ‘micro frontend’ architectuur waarbij de filosofie ach
 Een traditionele SPA frontend applicatie is monolithisch, met alle bekende nadelen van een monolithische backend applicatie.
 Met micro frontend architectuur kunnen verschillende teams van ontwikkelaars onafhankelijk van elkaar aan micro frontends ontwikkelen en uitrollen.
 
-Laag 5 componenten hebben interactie met componenten op laag 5 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is.
+Voor de ontwikkeling van frontend applicaties bedoeld voor burgers en bedrijven wordt gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System: https://github.com/nl-design-system/utrecht. Totdat NL design de 1.0 status heeft bereikt wordt gebruik gemaakt van Material Design.
+
+Laag 5 componenten hebben interactie met componenten op laag 4 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is.
 
 ### Technologie keuzes
 Voor de ontwikkeling micro frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
