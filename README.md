@@ -49,16 +49,16 @@ De belangrijkste punten zijn:
 1. Toestandsloos - Componenten bewaren geen statusinformatie om goed schaalbaar te zijn.
 
 ### Cloud Native architectuur principes
-1. Gebaseerd op een collectie van autonome microservices, waarbij microservices zich onafhankelijk van elkaar kunnen ontwikkelen en los van elkaar kunnen worden uitgerold.
-1. Ondersteuning van een geautomatiseerd proces voor CI-CD (Continious Integration – Continious Delivery) voor frequente uitrol van microservices.
+1. Gebaseerd op een collectie van autonome componenten, waarbij componenten zich onafhankelijk van elkaar kunnen ontwikkelen en los van elkaar kunnen worden uitgerold.
+1. Ondersteuning van een geautomatiseerd proces voor CI-CD (Continious Integration – Continious Delivery) voor frequente uitrol van componenten.
 1. Gebaseerd op container technologie, waarbij alle code afhankelijkheden in de container zijn ingesloten. Container images worden gedistribueerd via een centraal registry.
 1. Gebruik van volledig geautomatiseerde cloud native processen voor:
-   1. Vervanging van micro-services die falen door bijvoorbeeld en software crash.
+   1. Vervanging van componenten die falen door bijvoorbeeld en software crash.
    1. Vervanging van onderliggende hardware als die faalt.
-   1. Schaling van microservices, bijvoorbeeld op basis van de actuele belasting.
+   1. Schaling van componenten, bijvoorbeeld op basis van de actuele belasting.
    1. Active-active redundantie.
-1. Micro services zijn ‘state-less’ ten behoeve van horizontale schaalbaarheid en active-active redundantie.
-1. Decentrale opslag van gegevens zoals ‘state’. Om ongewenste koppeling te voorkomen, wordt de opslag wordt uitsluitend aangeroepen door de microservice die de gegevens beheerd.
+1. Componenten zijn ‘state-less’ ten behoeve van horizontale schaalbaarheid en active-active redundantie.
+1. Decentrale opslag van gegevens zoals ‘state’. Om ongewenste koppeling te voorkomen, wordt de opslag wordt uitsluitend aangeroepen door de componenten die de gegevens beheerd.
 
 ### Leverancier agnostisch
 Het streven is om zoveel mogelijk leverancier agnostisch te zijn en daarmee ‘vendor lock-in’ te beperken.
@@ -291,7 +291,7 @@ Om efficiënt samen te werken dient er overeenstemming te zijn over:
 * Gemeenschappelijke CI/CD benadering
 * Gemeenschappelijk ontwikkelproces, inclusief synchronisatie van sprints
 
-In een micro-service architectuur is het strikt genomen niet nodig dat alle services/componenten met dezelfde technologie worden ontwikkeld. Echter, als ontwikkelaars van verschillende OOs aan dezelfde midden componenten moeten kunnen werken, moet er ook overeenstemming zijn over:
+In een component architectuur is het strikt genomen niet nodig dat alle services/componenten met dezelfde technologie worden ontwikkeld. Echter, als ontwikkelaars van verschillende OOs aan dezelfde midden componenten moeten kunnen werken, moet er ook overeenstemming zijn over:
 * Gemeenschappelijke applicatie technologie stack
 * Gemeenschappelijke code standaarden
 
