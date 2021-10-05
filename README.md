@@ -13,15 +13,14 @@
 * [Midden team functionaliteit](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#midden-team-functionaliteit)
 
 ## Inleiding
-Dit document beschrijft in eerste instantie de architectuur richtlijnen voor KiK (Klantgerichtwerken in Ketens), maar de richtlijnen kunnen ook door andere Organistatie Onderdelen (OOs) worden toegepast.
+Dit document beschrijft de architectuur richtlijnen voor in eerste instantie KiK (Klantgerichtwerken in Ketens), maar kan ook door andere Organistatie Onderdelen (OOs) worden toegepast.
 
-De nadruk ligt op laag 4 en 5 van het Common Ground vijf lagen model.
+De richtlijnen gelden voor programmatuur waarbij de gemeente controle heeft over de bron code, danwel in de toekomst mogelijk zelf het onderhoud van de programmatuur in eigen hand wil nemen.
 
-Het programma is gebaseerd op de gemeentelijke Common Ground architectuur principes.
+De nadruk in dit document ligt op laag 4 en 5 van het Common Ground vijf lagen model.
 
-Daarnaast is gekozen voor een Cloud Native benadering.
-Cloud Native houdt in dit gevaal in dat gebruik wordt gemaakt van Azure Kubernetes (AKS) met Otomi voor het beheer.
-
+Naast Common Ground is gekozen voor een Cloud Native benadering.
+Cloud Native houdt in dit geval in dat gebruik wordt gemaakt van Azure Kubernetes (AKS) met Otomi voor het beheer.
 Het streven is om zoveel mogelijk leverancier agnostisch te zijn, zodat bijvoorbeeld van Azure overgestapt kan worden naar een andere cloud provider.
 
 Een ander uitgangspunt voor de architectuur is om te komen tot synergie en hergebruik tussen verschillende OOs.
@@ -73,8 +72,8 @@ Dit verschijnsel werd door de CTO van Amazon omschreven als ‘undifferentiated 
 
 Het doel van de architectuur is ook om het mogelijk te maken dat ontwikkelaars en beheerders zich maximaal richten op de eigenlijke missie: het stroomlijnen van gemeentelijke processen.
 
-### Samenwerking met andere OOs
-In lijn met Common Ground principes moet er worden gestreefd naar herbruikbaarheid van oplossingen in de samenwerking met andere OOs.
+### Samenwerking tussen OOs
+In lijn met Common Ground principes moet er worden gestreefd naar herbruikbaarheid van oplossingen in de samenwerking tussen OOs.
 
 Door afstemming op het gebied van andere andere platform infrastructuur, technologie keuzes, beheer en standaarden op het gebied van APIs en documentatie kan schaalvoordeel worden behaald.
 
