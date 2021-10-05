@@ -87,7 +87,9 @@ Met micro frontend architectuur kunnen verschillende teams van ontwikkelaars ona
 Laag 5 componenten hebben interactie met componenten op laag 5 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is.
 
 ### Technologie keuzes
-Voor de ontwikkeling micro frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
+Voor de ontwikkeling van frontend applicaties bedoeld voor burgers en bedrijven wordt zoveel als mogelijk gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System:https://github.com/nl-design-system/utrecht
+
+Voor de ontwikkeling van overige micro frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
 
 Material Design is de de-facto standaard component bibliotheek van Angular, met een groot aantal UI elementen zoals: drop-down box, datapicker, menu, tabel met pagination en sorteer opties.
 
