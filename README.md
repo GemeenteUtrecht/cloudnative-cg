@@ -145,12 +145,12 @@ De richtlijnen in deze paragraaf zijn zowel van toepassing op externe APIs (bijv
 Goed ontworpen en gedocumenteerde interne APIs zijn een vereiste voor hergebruik van componenten en voor de onderhoudbaarheid.
 
 Het document “API Strategie Algemeen”, dat een API strategie van de Nederlandse overheid beschrijft is van toepassing; zie: https://docs.geostandaarden.nl/api/API-Strategie/.
-Daarnaast moet worden voldaan aan de richtlijnen in sub paragrafen over het API first principe en REST principes.
+Daarnaast moet worden voldaan aan de richtlijnen in sub paragrafen over het contract first principe en REST principes.
 
-#### API first principe
+#### Contract first principe
 De APIs worden gespecificeerd met behulp van de OpenAPI 3 .x standaard.
 
-De ‘API first’ benadering wordt toegepast, waarbij de ontwikkelaar of architect eerst de API specificeert in een OpenAPI yaml document dat zowel door ontwikkelaars als door software leesbaar is.
+De ‘Contract first’ benadering wordt toegepast, waarbij de ontwikkelaar of architect eerst de API specificeert in een OpenAPI yaml document dat zowel door ontwikkelaars als door software leesbaar is.
 
 Het OpenAPI generator tool kan op basis van een OpenAPI yaml file de implementatie van de API genereren, die vervolgens eenvoudig vanuit de applicatie code kan worden aangeroepen.
 De OpenAPI generator ondersteund vele programmeertalen, inclusief Python en Typescript.
