@@ -84,12 +84,12 @@ De UI is gebaseerd op ‘micro frontend’ architectuur waarbij de filosofie ach
 Een traditionele SPA frontend applicatie is monolithisch, met alle bekende nadelen van een monolithische backend applicatie.
 Met micro frontend architectuur kunnen verschillende teams van ontwikkelaars onafhankelijk van elkaar aan micro frontends ontwikkelen en uitrollen.
 
-Voor de ontwikkeling van frontend applicaties bedoeld voor burgers en bedrijven wordt gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System: https://github.com/nl-design-system/utrecht. Totdat NL design de 1.0 status heeft bereikt wordt gebruik gemaakt van Material Design.
-
 Laag 5 componenten hebben interactie met componenten op laag 4 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is.
 
 ### Technologie keuzes
-Voor de ontwikkeling micro frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
+Voor de ontwikkeling van __externe__ frontend applicaties (bedoeld voor burgers en bedrijven) wordt gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System: https://github.com/nl-design-system/utrecht. Totdat NL design de 1.0 status heeft bereikt wordt gebruik gemaakt van Material Design voor de ontwikkeling van publiekelijk toegangkelijke frontends.
+
+Voor de ontwikkeling van __interne__ Gemeente Utrecht frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
 
 Material Design is de de-facto standaard component bibliotheek van Angular, met een groot aantal UI elementen zoals: drop-down box, datapicker, menu, tabel met pagination en sorteer opties.
 
@@ -132,8 +132,13 @@ Kosten kunnen worden bespaart door services buiten kantooruren automatisch af te
 * Eenvoudig beheer van service versies, voor eenvoudige integratie met CI/CD.
 * Automatische ‘active-active’ redundantie.
 
-#### Python
-De componenten in laag 2 en 4 worden in principe met Python ontwikkeld.
+#### Helm charts
+Helm charts zijn een verzameling yaml files die definiëren hoe een component op een kubernetes cluster wordt uitgerold.
+Voor bestaande componenten waarvoor al Helm charts zijn gedefinieerd, kan deze methode worden gebruikt in plaats van Knative.
+De definitie en het testen van Helm charts is erg complex, in het bizonder de configuratie van automatische schaling en redundantie. Om deze rede wordt voor nieuwe componenten Knative gebruikt.
+
+#### Component ontwikkel platform
+De componenten in laag 2 en 4 worden in bij voorkeur met Python ontwikkeld, maar een ander gangbaar ontwikkel eco-systeem zoals Java is ook acceptabel.
 
 Om de hergebruik en onderhoudbaarheid te bevorderen is het van belang om de afhankelijkheid van externe Python libraries zo veel mogelijk te beperken. Dit is in het bijzonder van belang als als er wordt gewerkt met verschillende ontwikkelaars en teams.
 Django wordt niet gebruikt voor GUI ontwikkeling.
@@ -148,7 +153,7 @@ Het document “API Strategie Algemeen”, dat een API strategie van de Nederlan
 Daarnaast moet worden voldaan aan de richtlijnen in sub paragrafen over het contract first principe en REST principes.
 
 #### Contract first principe
-De APIs worden gespecificeerd met behulp van de OpenAPI 3 .x standaard.
+De APIs worden gespecificeerd met behulp van de OpenAPI 3.x standaard.
 
 De ‘Contract first’ benadering wordt toegepast, waarbij de ontwikkelaar of architect eerst de API specificeert in een OpenAPI yaml document dat zowel door ontwikkelaars als door software leesbaar is.
 
