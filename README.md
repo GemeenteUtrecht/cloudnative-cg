@@ -84,7 +84,7 @@ De UI is gebaseerd op ‘micro frontend’ architectuur waarbij de filosofie ach
 Een traditionele SPA frontend applicatie is monolithisch, met alle bekende nadelen van een monolithische backend applicatie.
 Met micro frontend architectuur kunnen verschillende teams van ontwikkelaars onafhankelijk van elkaar aan micro frontends ontwikkelen en uitrollen.
 
-Laag 5 componenten hebben interactie met componenten op laag 4 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is. <-- hier lijkt overigens verandering in te komen. Er ligt een voorstel vanuit Den Haag om de ZGW API standaard aan te passen om een ander autorisatiemodel te volgen
+Laag 5 componenten hebben interactie met componenten op laag 4 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is. **<-- hier lijkt overigens verandering in te komen. Er ligt een voorstel vanuit Den Haag om de ZGW API standaard aan te passen om een ander autorisatiemodel te volgen**
 
 ### Technologie keuzes
 Voor de ontwikkeling van __externe__ frontend applicaties (bedoeld voor burgers en bedrijven) wordt gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System: https://github.com/nl-design-system/utrecht. Totdat NL design de 1.0 status heeft bereikt wordt gebruik gemaakt van Material Design voor de ontwikkeling van publiekelijk toegangkelijke frontends.
@@ -135,7 +135,7 @@ Kosten kunnen worden bespaart door services buiten kantooruren automatisch af te
 #### Helm charts
 Helm charts zijn een verzameling yaml files die definiëren hoe een component op een kubernetes cluster wordt uitgerold.
 Voor bestaande componenten waarvoor al Helm charts zijn gedefinieerd, kan deze methode worden gebruikt in plaats van Knative.
-De definitie en het testen van Helm charts is erg complex, in het bizonder de configuratie van automatische schaling en redundantie. Om deze rede wordt voor nieuwe componenten Knative gebruikt.
+De definitie en het testen van Helm charts is erg complex, in het bijzonder de configuratie van automatische schaling en redundantie. Om deze rede wordt voor nieuwe componenten Knative gebruikt.
 
 #### Component ontwikkel platform
 De componenten in laag 2 en 4 worden in bij voorkeur met Python ontwikkeld, maar een ander gangbaar ontwikkel eco-systeem zoals Java is ook acceptabel.
@@ -175,7 +175,7 @@ Voordelen van de ‘contract first’ benadering en het gebruik van de OpenAPI g
 * Data objecten worden gespecificeerd in JSON format.
 * Http gzip voor de message payload wordt gebruikt.
 ##### Logische resources
-* De basis voor de API zijn logische resources.
+* De basis voor de API zijn logische resources. **<-- heb gebruik van de objectenregistratie voldoet hier eigenlijk niet aan**
 * Een logische resource is een zelfstandig naamwoord, geen werkwoord. Voorbeelden zijn: "klant", "zaak".
 * Meervoud moet worden gebuikt als de respons kan bestaan uit meerdere resources; enkelvoud als er altijd een enkele resource wordt geretourneerd.
 De URL kan worden opgebouwd uit een hiërarchie van resources. In het volgende voorbeeld URL zijn `land`, `klant` en `clips` resources: `/land/poland/klant/123456/clips/654321`.
