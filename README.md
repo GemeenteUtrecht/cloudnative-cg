@@ -5,13 +5,13 @@
 * [Architectuur principes](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#architectuur-principes)
 * [Richtlijnen voor laag 5 componenten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#richtlijnen-voor-laag-5-componenten)
 * [Richtlijnen voor laag 4 componenten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#richtlijnen-voor-laag-4-componenten)
+* [Technologie keuzes voor uitrol in de cloud](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#technologie-keuzes-voor-uitrol-in-de-cloud)
 * [API richtlijnen](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#api-richtlijnen)
-* [Technologie keuzes](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#technologie-keuzes)
 * [Monitoring en logging richtlijnen](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#monitoring-en-logging-richtlijnen)
 * [Component documentatie](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#component-documentatie)
 * [Database architectuur](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#database-architectuur)
 * [CI/CD](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#cicd)
-* [Samen inrichten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#midden-team-functionaliteit)
+* [Samen inrichten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#samen-inrichten)
 
 ## Inleiding
 Dit document beschrijft de archtitectuur richtlijnen van de gemeente Utrecht voor software op basis Common Ground en Cloud Native principes.
@@ -84,7 +84,11 @@ Met micro frontend architectuur kunnen verschillende teams van ontwikkelaars ona
 Laag 5 componenten hebben interactie met componenten op laag 4 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is.
 
 ### Technologie keuzes voor UI ontwikkeling
-Voor de ontwikkeling van __externe__ frontend applicaties (bedoeld voor burgers en bedrijven) wordt gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System: https://github.com/nl-design-system/utrecht. Totdat NL design de 1.0 status heeft bereikt wordt gebruik gemaakt van Material Design voor de ontwikkeling van publiekelijk toegangkelijke frontends.
+Voor de ontwikkeling van __externe__ frontend applicaties (bedoeld voor burgers en bedrijven) wordt gebruik gemaakt van het van NL design systems afgeleide Utrecht Design System: https://github.com/nl-design-system/utrecht.
+
+De volgende technologie keuzes zijn alleen van toepassing op software ontwikkeling die onder directe regie van de gemeente Utrecht plaatsvindt.
+
+Totdat NL design de 1.0 status heeft bereikt wordt gebruik gemaakt van Angular en Material Design voor de ontwikkeling van __externe__ frontend applicaties.
 
 Voor de ontwikkeling van __interne__ Gemeente Utrecht frontends wordt gebruik gemaakt van Typescript, Angular Elements, Material Design en NX.
 
@@ -99,8 +103,6 @@ Het Common Ground principe van ‘eenmalige vastlegging’ betekend dat als een 
 
 Data die door een component is gewijzigd, zoals bijvoorbeeld een zaak eigenschap, dient onmiddellijk te worden weggeschreven naar de laag 2 APIs. Dit betreft niet alleen de uiteindelijke status, nadat alle bewerkingen door de applicatie zijn afgerond, maar ook tussentijdse updates.
 
-Er is gekozen voor een Cloud Native infrastructuur. Concreet betekent dit dat gebruik wordt gemaakt van Azure Kubernetes (AKS) met Otomi voor het beheer.
-
 Componenten die worden uitgerold in de infrastructuur van de Gemeente Utrecht dienen aan de volgende eisen te voldoen:
 * De uitrol van een component moet gebaseerd zijn op container technologie, waarbij alle code afhankelijkheden in de container zijn ingesloten. Container images worden gedistribueerd via het Otomi Harbor registry.
 * Indien de applicatie bestaat uit meerdere componenten moeten deze los van elkaar in containers worden uitgerold.
@@ -109,7 +111,7 @@ Het component kan gebruik maken van een externe database voor de opslag van data
 * Redundantie en schaling wordt door het platform geïmplementeerd door middel van een laag 7 (http) load-balancer waarbij inkomend API verkeer wordt verdeeld over meerdere actieve kopieën van het component.
 * Container images moeten veilig zijn en worden door de container registry gescand (met behulp van het open-source tool Trivi) op bekende kwetsbaarheden.
 
-## Technologie keuzes voor componenten
+## Technologie keuzes voor uitrol in de cloud
 #### Knative
 Componenten worden in principe met behulp van Knative uitgerold.
 
@@ -131,7 +133,7 @@ Helm charts zijn een verzameling yaml files die definiëren hoe een component op
 Voor bestaande componenten waarvoor al Helm charts zijn gedefinieerd, kan deze methode worden gebruikt in plaats van Knative.
 De definitie en het testen van Helm charts is erg complex, in het bijzonder de configuratie van automatische schaling en redundantie. Om deze rede wordt voor nieuwe componenten Knative gebruikt.
 
-### API richtlijnen
+## API richtlijnen
 In een op componenten gebaseerd architectuur zijn naast de externe APIs, interne APIs tussen de componenten van groot belang.
 De richtlijnen in deze paragraaf zijn zowel van toepassing op externe APIs (bijvoorbeeld tussen taal 4 en 5) alsmede interne APIs (bijvoorbeeld tussen componenten in laag 4).
 
@@ -144,7 +146,7 @@ De volgende standaarden zijn van toepassing:
 
 Daarnaast moet worden voldaan aan de richtlijnen in de sub paragraaf over het contract first principe.
 
-#### Contract first principe
+### Contract first principe
 De APIs worden gespecificeerd met behulp van de OpenAPI 3.x standaard.
 
 De ‘Contract first’ benadering wordt toegepast, waarbij de ontwikkelaar of architect eerst de API specificeert in een OpenAPI yaml document dat zowel door ontwikkelaars als door software leesbaar is.
@@ -161,7 +163,7 @@ Voordelen van de ‘contract first’ benadering en het gebruik van de OpenAPI g
 * Geen implementatie fouten, dus consistent hoge kwaliteit
 * Snellere werkwijze
 
-### Monitoring en logging richtlijnen
+## Monitoring en logging richtlijnen
 Om de ‘health’ van een component te kunnen bewaken met behulp van Prometheus dienen componenten een /metrics endpoint te ondersteunen. Via dit eindpont moeten alle voor de applicatie relevante numerieke status data worden gepresenteerd.
 
 Voor de meeste applicatie platforms zoals Java en Django zijn libraries beschikbaar waarmee een /metrics endpoint voor het gebruik met Prometheus wordt ondersteund.
@@ -170,7 +172,7 @@ Component in een container dienen ongebufferd te loggen naar stdout en stderr zo
 
 Voor het overdragen van de component/container logs naar Loki kan de Promtail agent worden gebruikt. Promtail is open-source software afkomstig van dezelfde ontwikkelaars als Loki en Grafana.
 
-### Component documentatie
+## Component documentatie
 Voor de onderhoudbaarheid en bevordering van hergebruik dienen componenten op op een uniforme manier worden gedocumenteerd.
 
 De documentatie moet bestaan uit:
@@ -193,8 +195,8 @@ Op Azure kan gebruik worden gemaakt van een van de volgende twee managed Postgre
   * Max 100 GB
   * SLA 99.99% uptime (~1 uur/jaar down)
   * Geen auto-scaling
-  * Hyperscale (Citus) server group
-* Maakt gebruik van meerdere server nodes
+* Hyperscale (Citus) server group
+  * Maakt gebruik van meerdere server nodes
   * Opslag en prestaties schalen horizontaal
   * Hoge beschikbaarheid, afhankelijk van de configuratie
   * Hogere kosten
