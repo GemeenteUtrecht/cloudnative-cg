@@ -14,13 +14,11 @@
 * [Samen inrichten](https://github.com/GemeenteUtrecht/cloudnative-cg/blob/main/README.md#midden-team-functionaliteit)
 
 ## Inleiding
-Dit document beschrijft de architectuur richtlijnen voor in eerste instantie KiK (Klantgerichtwerken in Ketens), maar kan ook door andere Organistatie Onderdelen (OOs) worden toegepast.
+Dit document beschrijft de archtitectuur richtlijnen van de gemeente Utrecht voor software op basis Common Ground en Cloud Native principes.
 
-De richtlijnen gelden voor programmatuur waarbij de gemeente controle heeft over de bron code, danwel in de toekomst mogelijk zelf het onderhoud van de programmatuur in eigen hand wil nemen.
-
-Naast Common Ground is gekozen voor een Cloud Native benadering.
+Naast Common Ground heeft de gemeente Utrecht gekozen voor een Cloud Native benadering.
 Cloud Native houdt in dit geval in dat gebruik wordt gemaakt van Azure Kubernetes (AKS) met Otomi voor het beheer.
-Het streven is om zoveel mogelijk leverancier agnostisch te zijn, zodat bijvoorbeeld van Azure overgestapt kan worden naar een andere cloud provider.
+Het streven is echter om zoveel mogelijk leverancier agnostisch te zijn, zodat bijvoorbeeld van Azure overgestapt kan worden naar een andere cloud provider.
 
 Een ander uitgangspunt voor de architectuur is om te komen tot synergie en hergebruik tussen verschillende OOs.
 
@@ -80,7 +78,7 @@ Wel is het van belang om de budgettaire en bestuurlijke autonomie van OOs in ach
 
 ## Richtlijnen voor laag 5 componenten
 De UI is gebaseerd op ‘micro frontend’ architectuur waarbij de filosofie achter microservices naar frontend development wordt gebracht.
-Een traditionele SPA frontend applicatie is monolithisch, met alle bekende nadelen van een monolithische backend applicatie.
+Een traditionele SPA frontend applicatie is monolithisch, met alle nadelen zoals die bekend zijn van een monolithische backend applicatie.
 Met micro frontend architectuur kunnen verschillende teams van ontwikkelaars onafhankelijk van elkaar aan micro frontends ontwikkelen en uitrollen.
 
 Laag 5 componenten hebben interactie met componenten op laag 4 en nooit direct interactie met laag 2/3, onder andere omdat het autorisatie model van laag 2/3 APIs hier niet voor ontworpen is.
@@ -213,7 +211,7 @@ De migratie naar een NoSQL heeft echter een zeer grote impact op de lagen 1 en 2
 CI/CD is gebaseerd op de volgende principes:
 * Elk component kan afzonderlijk worden uitgerold
 * In lijn met het losse koppeling principe, heeft elk component zijn eigen git repository
-* Een ontwikkel proces zoals [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) of [GitHub Flow](https://scottchacon.com/2011/08/31/github-flow.html) moet worden doorlopen voordat code kan worden ge-commit naar de git main branch
+* Een ontwikkel proces zoals bijvoorbeeld [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) of [GitHub Flow](https://scottchacon.com/2011/08/31/github-flow.html) moet worden doorlopen voordat code kan worden ge-commit naar de git main branch
 * De uitrol naar productie en acceptatie is volledig geaautomitiseerd zonder handmatige stapppen.
    * Fouten worden vermeden: de uitrol is volledig reproduceerbaar.
    * Mindere werk: maakt frequente uitrol mogelijk.
@@ -222,6 +220,8 @@ CI/CD is gebaseerd op de volgende principes:
 * De geautomatiseerde CI/CD pijplijn wordt getriggerd door een commit op de git main branch
 * Geautomatiseerde tests worden uitgevoerd als onderdeel van de CI/CD pijplijn
 * De output van een CI/CD straat is een (docker) image in het Harbor registry
+* In plaats van het source code kunnen leeveranciers ook een contaier image aanleveren doormiddel van een push naar het Harbor registry
+   * In dat geval is er sprake van een CD straat (ipv CI/CD)
 * Harbor scant het image op kwetsbaarheden
 * CD kan in principe staan voor Continious Deployment of voor Continious Delivery. Er is gekozen voor deze laatste definitie; hierbij is er een altijd een persoon (product owner of  beheerder) die beslist of een nieuwe versie in productie gaat.
 * De product owner of beheerder kan kiezen voor een ‘canary deployment’ waarbij de nieuwe versie bijvoorbeeld 10% van het verkeer krijgt. Op die manier worden eventuele problemen met de nieuwe versie zichtbaar zonder dat de hele organisatie hiervan te veel last heeft.
